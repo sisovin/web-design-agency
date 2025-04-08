@@ -1,6 +1,6 @@
 # Web Design Agency
 
-This repository contains the codebase for a web design agency application. The application is divided into three main parts: backend, frontend, and shared components.
+This repository contains the codebase for a web design agency application. The application is structured as a monorepo with both backend and frontend components.
 
 ## Repository Structure
 
@@ -55,49 +55,70 @@ web-design-agency/
 └── README.md
 ```
 
-## Setting Up the Backend
+## Setup Instructions
 
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/githubnext/workspace-blank.git
-   cd workspace-blank/backend
-   ```
+### Backend
 
-2. Install dependencies:
+1. Install dependencies:
    ```sh
+   cd backend
    npm install
    ```
 
-3. Set up environment variables:
-   - Create a `.env` file in the `backend` directory and add the required environment variables. Refer to `src/config/env.ts` for the list of required variables.
+2. Set up environment variables:
+   - Create a `.env` file in the `backend` directory and add the required environment variables. Refer to `src/config/env.ts` for the variables needed.
 
-4. Start the backend server:
+3. Set up the database:
+   - Ensure you have PostgreSQL installed and running.
+   - Create a database and update the connection details in `src/config/db.ts`.
+
+4. Set up Redis:
+   - Ensure you have Redis installed and running.
+   - Update the connection details in `src/config/redis.ts`.
+
+### Frontend
+
+1. Install dependencies:
    ```sh
+   cd frontend
+   npm install
+   ```
+
+2. Set up environment variables:
+   - Create a `.env` file in the `frontend` directory and add the required environment variables.
+
+## Running the Application
+
+### Backend
+
+1. Start the backend server:
+   ```sh
+   cd backend
    npm start
    ```
 
-## Setting Up the Frontend
+### Frontend
 
-1. Navigate to the `frontend` directory:
+1. Start the frontend app:
    ```sh
-   cd ../frontend
-   ```
-
-2. Install dependencies:
-   ```sh
-   npm install
-   ```
-
-3. Start the frontend app:
-   ```sh
+   cd frontend
    npm start
    ```
 
 ## Running Tests
 
-1. Navigate to the `backend` or `frontend` directory, depending on which tests you want to run.
+### Backend
 
-2. Run the tests:
+1. Run backend tests:
    ```sh
+   cd backend
+   npm test
+   ```
+
+### Frontend
+
+1. Run frontend tests:
+   ```sh
+   cd frontend
    npm test
    ```
