@@ -1,0 +1,78 @@
+/* Global styles for the Admin Dashboard, User Dashboard, and Services pages */
+
+/* Admin Dashboard styles */
+.admin-dashboard {
+  background-color: #f8f9fa;
+  padding: 20px;
+}
+
+.admin-dashboard h1 {
+  font-size: 2rem;
+  color: #343a40;
+}
+
+.admin-dashboard section {
+  margin-bottom: 20px;
+}
+
+.admin-dashboard ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.admin-dashboard li {
+  background-color: #ffffff;
+  border: 1px solid #dee2e6;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+/* User Dashboard styles */
+.user-dashboard {
+  background-color: #f8f9fa;
+  padding: 20px;
+}
+
+.user-dashboard h1 {
+  font-size: 2rem;
+  color: #343a40;
+}
+
+.user-dashboard section {
+  margin-bottom: 20px;
+}
+
+.user-dashboard ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.user-dashboard li {
+  background-color: #ffffff;
+  border: 1px solid #dee2e6;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+/* Services Page styles */
+.services-page {
+  background-color: #f8f9fa;
+  padding: 20px;
+}
+
+.services-page h1 {
+  font-size: 2rem;
+  color: #343a40;
+}
+
+.services-page ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.services-page li {
+  background-color: #ffffff;
+  border: 1px solid #dee2e6;
+  padding: 10px;
+  margin-bottom: 10px;
+}
