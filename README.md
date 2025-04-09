@@ -5,12 +5,197 @@ This repository contains the codebase for a web design agency application. The a
 ## **Root Directory**
 ```
 web-design-agency/
-├── backend/                  # Node.js + Express + Drizzle ORM (API server)
-├── frontend/                 # Lynx.js (React-based) + TypeScript (Client app)
-├── shared/                   # Shared types, constants (optional but recommended)
+│
+├── .github/                                # GitHub configuration
+│   └── workflows/                          # CI/CD pipeline configurations
+│       ├── deploy.yml
+│       └── test.yml
+│
+├── packages/                               # Monorepo structure using workspaces
+│   │
+│   ├── backend/                            # Node.js backend
+│   │   ├── src/
+│   │   │   ├── config/                     # Configuration files
+│   │   │   │   ├── database.ts             # Database configuration
+│   │   │   │   ├── redis.ts                # Redis configuration
+│   │   │   │   └── env.ts                  # Environment variables
+│   │   │   │
+│   │   │   ├── controllers/                # API controllers
+│   │   │   │   ├── auth.controller.ts
+│   │   │   │   ├── projects.controller.ts
+│   │   │   │   └── users.controller.ts
+│   │   │   │
+│   │   │   ├── db/                         # Database related code
+│   │   │   │   ├── schema/                 # Drizzle schema definitions
+│   │   │   │   │   ├── users.ts
+│   │   │   │   │   ├── projects.ts
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── migrations/             # Database migrations
+│   │   │   │   └── index.ts                # DB connection handler
+│   │   │   │
+│   │   │   ├── middleware/                 # Express middleware
+│   │   │   │   ├── auth.middleware.ts
+│   │   │   │   ├── error.middleware.ts
+│   │   │   │   └── logging.middleware.ts
+│   │   │   │
+│   │   │   ├── routes/                     # API routes
+│   │   │   │   ├── auth.routes.ts
+│   │   │   │   ├── projects.routes.ts
+│   │   │   │   ├── users.routes.ts
+│   │   │   │   └── index.ts
+│   │   │   │
+│   │   │   ├── services/                   # Business logic
+│   │   │   │   ├── auth.service.ts
+│   │   │   │   ├── projects.service.ts
+│   │   │   │   ├── users.service.ts
+│   │   │   │   └── email.service.ts
+│   │   │   │
+│   │   │   ├── utils/                      # Utility functions
+│   │   │   │   ├── password.ts             # Argon2 password utilities
+│   │   │   │   ├── tokens.ts               # JWT token utilities
+│   │   │   │   └── validators.ts           # Input validation
+│   │   │   │
+│   │   │   ├── websockets/                 # WebSocket handlers
+│   │   │   │   ├── socket.ts
+│   │   │   │   └── handlers/
+│   │   │   │
+│   │   │   ├── payment/                    # Payment gateway integrations
+│   │   │   │   ├── aba.gateway.ts
+│   │   │   │   └── bakong.gateway.ts
+│   │   │   │
+│   │   │   ├── storage/                    # File storage handlers
+│   │   │   │   ├── local.storage.ts
+│   │   │   │   └── s3.storage.ts
+│   │   │   │
+│   │   │   ├── logging/                    # Logging and monitoring
+│   │   │   │   ├── logger.ts
+│   │   │   │   └── monitor.ts
+│   │   │   │
+│   │   │   ├── types/                      # Backend-only type definitions
+│   │   │   │   └── express.d.ts
+│   │   │   │
+│   │   │   ├── app.ts                      # Express app setup
+│   │   │   └── server.ts                   # Server entry point
+│   │   │
+│   │   ├── tests/                          # Backend tests
+│   │   │   ├── unit/
+│   │   │   ├── integration/
+│   │   │   └── utils/
+│   │   │
+│   │   ├── .env.example                    # Example environment variables
+│   │   ├── jest.config.js                  # Jest configuration
+│   │   ├── package.json
+│   │   └── tsconfig.json
+│   │
+│   ├── frontend/                           # React/Lynx.js frontend
+│   │   ├── public/                         # Static assets
+│   │   │   ├── locales/                    # i18n translation files
+│   │   │   │   ├── en/
+│   │   │   │   └── km/
+│   │   │   ├── images/
+│   │   │   └── favicon.ico
+│   │   │
+│   │   ├── src/
+│   │   │   ├── components/                 # Shared UI components
+│   │   │   │   ├── common/
+│   │   │   │   │   ├── Button/
+│   │   │   │   │   ├── Input/
+│   │   │   │   │   └── Modal/
+│   │   │   │   ├── layout/
+│   │   │   │   │   ├── Header/
+│   │   │   │   │   ├── Footer/
+│   │   │   │   │   └── Sidebar/
+│   │   │   │   └── forms/
+│   │   │   │
+│   │   │   ├── hooks/                      # Custom React hooks
+│   │   │   │   ├── useAuth.ts
+│   │   │   │   └── useApi.ts
+│   │   │   │
+│   │   │   ├── pages/                      # Page components
+│   │   │   │   ├── Home/
+│   │   │   │   ├── Auth/
+│   │   │   │   │   ├── Login.tsx
+│   │   │   │   │   └── Register.tsx
+│   │   │   │   ├── Services/
+│   │   │   │   └── Contact/
+│   │   │   │
+│   │   │   ├── features/                   # Feature-specific components
+│   │   │   │   ├── admin/                  # Admin dashboard
+│   │   │   │   │   ├── components/
+│   │   │   │   │   ├── pages/
+│   │   │   │   │   └── routes.tsx
+│   │   │   │   │
+│   │   │   │   └── user/                   # User dashboard
+│   │   │   │       ├── components/
+│   │   │   │       ├── pages/
+│   │   │   │       └── routes.tsx
+│   │   │   │
+│   │   │   ├── services/                   # API service calls
+│   │   │   │   ├── api.ts
+│   │   │   │   ├── auth.service.ts
+│   │   │   │   └── projects.service.ts
+│   │   │   │
+│   │   │   ├── store/                      # State management
+│   │   │   │   ├── slices/
+│   │   │   │   └── index.ts
+│   │   │   │
+│   │   │   ├── styles/                     # Lynx CSS styles
+│   │   │   │   ├── global.css
+│   │   │   │   ├── variables.css
+│   │   │   │   └── components/
+│   │   │   │
+│   │   │   ├── utils/                      # Frontend utility functions
+│   │   │   │   ├── formatting.ts
+│   │   │   │   └── validation.ts
+│   │   │   │
+│   │   │   ├── i18n/                       # Internationalization setup
+│   │   │   │   ├── config.ts
+│   │   │   │   └── translations/
+│   │   │   │
+│   │   │   ├── App.tsx                     # Main application component
+│   │   │   ├── main.tsx                    # Application entry point
+│   │   │   └── routes.tsx                  # Main route definitions
+│   │   │
+│   │   ├── tests/                          # Frontend tests
+│   │   │   ├── unit/
+│   │   │   ├── integration/
+│   │   │   └── utils/
+│   │   │
+│   │   ├── .storybook/                     # Storybook configuration
+│   │   │   ├── main.js
+│   │   │   └── preview.js
+│   │   │
+│   │   ├── jest.config.js                  # Jest configuration
+│   │   ├── package.json
+│   │   └── tsconfig.json
+│   │
+│   └── shared/                             # Shared code between frontend and backend
+│       ├── src/
+│       │   ├── types/                      # Shared type definitions
+│       │   │   ├── user.types.ts
+│       │   │   ├── project.types.ts
+│       │   │   └── index.ts
+│       │   │
+│       │   ├── constants/                  # Shared constants
+│       │   │   ├── routes.ts
+│       │   │   └── errors.ts
+│       │   │
+│       │   ├── utils/                      # Shared utility functions
+│       │   │   ├── formatting.ts
+│       │   │   └── validation.ts
+│       │   │
+│       │   └── global.d.ts                 # Global type declarations
+│       │
+│       ├── package.json
+│       └── tsconfig.json
+│
+├── docker-compose.dev.yml                  # Development Docker setup (optional)
+├── .eslintrc.js                            # ESLint configuration
+├── .prettierrc                             # Prettier configuration
 ├── .gitignore
-├── package.json              # Monorepo scripts (optional)
-└── README.md
+├── package.json                            # Root package.json for workspaces
+├── tsconfig.base.json                      # Base TypeScript configuration
+└── README.md                               # Project documentation
 ```
 
 ### **Backend Structure** (`/backend`)
